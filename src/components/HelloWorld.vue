@@ -56,22 +56,32 @@
     </div>
     <clock-component :event-list="eventList"/>
     <br>
+    <hr>
     <div>
       <h4>Refs Example</h4>
       <refs/>
     </div>
-
+    <br>
+    <hr>
+    <div>
+      <h4>Events Example</h4>
+      <div>
+        <event @callbackEvent="handleCallbackEvent"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import clock from './clock.vue';
 import refs from './refs.vue';
+import event from './event.vue';
 export default {
   name: 'HelloWorld',
   components: {
     clockComponent: clock,
-    refs 
+    refs,
+    event  
   },
   props: {
     msg: String
@@ -103,6 +113,11 @@ export default {
       simpleText: "Example",
       listOfFruits,
       eventList  
+    }
+  },
+  methods: {
+    handleCallbackEvent(event){
+      console.log('Callback event name', event.name)
     }
   }
 }
