@@ -55,16 +55,23 @@
       </div>
     </div>
     <clock-component :event-list="eventList"/>
+    <br>
+    <div>
+      <h4>Refs Example</h4>
+      <refs/>
+    </div>
 
   </div>
 </template>
 
 <script>
 import clock from './clock.vue';
+import refs from './refs.vue';
 export default {
   name: 'HelloWorld',
   components: {
-    clockComponent: clock 
+    clockComponent: clock,
+    refs 
   },
   props: {
     msg: String
