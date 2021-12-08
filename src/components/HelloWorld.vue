@@ -63,7 +63,7 @@
     </div>
     <br>
     <hr>
-    <div>
+    <div class="mb-5">
       <h4>Events Example</h4>
       <div>
         <event @callbackEvent="handleCallbackEvent"/>
