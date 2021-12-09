@@ -1,27 +1,33 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-
+import VueRouter from 'vue-router'
+import Index from './pages/index'
 import PageNotFound from './pages/page-not-found'
+import Blog from "./pages/blog";
+import BlogPage from "./pages/blog-page";
+import BlogCreate from "./pages/blog-create";
+import Comment from "./components/comment";
 
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', component: ''},
+    { path: '/', component: Index },
     {
         path: '/blog',
-        component: ''
+        component: Blog
     },
     {
         path: '/blog-create',
-        component: ''
+        component: BlogCreate
     },
     {
         path: '/blog-post/:id',
-        component: '',
+        name: 'Post',
+        component: BlogPage,
         children: [
             {
-                path: '/comments',
-                component: ''
+                path: 'comments',
+                name: 'Comment',
+                component: Comment
             }
         ]
     },
@@ -31,8 +37,8 @@ const routes = [
     }
 ]
 
-const router = new VueRouter({
+
+
+export default new VueRouter({
     routes
 });
-
-export default router;
