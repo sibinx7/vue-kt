@@ -2,6 +2,7 @@ import axios from 'axios';
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
+    config['headers']['Authorization'] = 'TOKEN_XXX_YYY_ZZZ'
     return config;
 }, function (error) {
     // Do something with request error

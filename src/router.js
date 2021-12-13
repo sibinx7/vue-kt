@@ -5,6 +5,7 @@ import PageNotFound from './pages/page-not-found'
 import Blog from "./pages/blog";
 import BlogPage from "./pages/blog-page";
 import BlogCreate from "./pages/blog-create";
+import Login from "./pages/login";
 
 
 Vue.use(VueRouter);
@@ -37,7 +38,13 @@ const routes = [
             console.log('Blog post from')
             console.log(from)
             console.log(next)
+            next();
         }
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
         path: '*',
@@ -49,17 +56,14 @@ const routes = [
 
 const router =  new VueRouter({
     routes,
-    scrollBehavior (to, from, savedPosition) {
-        console.log(to)
-        console.log(from)
-        console.log(savedPosition)
-        // return desired position
-        return { x: 0, y: 0 } // return to browser 0,0 position
+    scrollBehavior () {
+        return { x: 0, y: 0 }
     }
 });
 
 
 router.beforeEach((to, from, next) => {
+    console.log('Before each main guard')
     console.log('Previous router')
     console.log(from)
     console.log('Current router')
@@ -68,6 +72,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach((to, from) => {
+    console.log('After each main guard')
     console.log(to)
     console.log(from)
 })
