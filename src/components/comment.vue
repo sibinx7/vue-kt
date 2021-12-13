@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../libs/axios.config';
 export default {
   name: "comment",
   data(){
