@@ -17,6 +17,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "pinia": "^2.1.6",
+    "react-error-boundary": "^4.0.11",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "vue3-easy-data-table": "^1.5.47"
