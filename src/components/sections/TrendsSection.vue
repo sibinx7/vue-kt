@@ -15,7 +15,7 @@
   import { onMounted, ref, markRaw } from 'vue';
   import TrendBPChartWidget from '../widgets/TrendBPChartWidget.vue';
   // import TrendSKINTEMPChartWidget from '../widgets/TrendSKINTEMPChartWidget.vue';
-  // import TrendCharts from '../widgets/TrendChartWidget.vue';
+  import TrendChart from '../widgets/TrendChartWidget.vue';
   import TrendPostureChartWidget from '../widgets/TrendPostureChartWidget.vue';
   import useReportStore from '../../stores/report';
 
@@ -29,7 +29,8 @@
   const keyComponent = {
     BP: markRaw(TrendBPChartWidget),
     Posture: markRaw(TrendPostureChartWidget)
-    // SKINTEMP: TrendSKINTEMPChartWidget,    
+    // SKINTEMP: TrendSKINTEMPChartWidget,  
+
   }
 
   onMounted(() => {
@@ -37,7 +38,7 @@
     multiChartData.value = trends; 
     trendsDataKeys.value = Object.keys(trends);
     trendsDataKeys.value.forEach((item)=> {
-      trendsComponents.value[item] = keyComponent[item] ? keyComponent[item] : null 
+      trendsComponents.value[item] = keyComponent[item] ? keyComponent[item] : TrendChart 
     });        
   })
 </script>

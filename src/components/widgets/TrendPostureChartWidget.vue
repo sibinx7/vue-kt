@@ -29,23 +29,73 @@ onUnmounted(() => {
 
 })
 
-const setOptions = (data) => {
-  const chartData = data.columns || [];
-  const chartOptions = chartData.map((item) => {
+const setOptions = ( data) => {
+  const columns = data.columns;
+  let connectionLosses = data['connection-loss'];
+  const manualEvents = data['manual-events'];
+  const clinicalEvents = data['clinical-alerts'];
+  const manualClinicalEvents = [
+    ...(manualEvents.map((item) => {
+      return [
+        {
+          name: 'Manual Events',
+          xAxis: item.start,
+          itemStyle: {
+            color: 'rgba(122, 217, 162, 0.5)' 
+          }
+        },
+        {
+          xAxis: item.end,
+          itemStyle: {
+            color: 'rgba(122, 217, 162, 0.5)' 
+          }
+        }
+      ]
+    })),
+    ...(clinicalEvents.map((item) => {
+      return [
+        {
+          name: 'Clinical Alerts',
+          xAxis: item.start, 
+          itemStyle: {
+            color: 'rgba(221, 221, 221, 0.5)'
+          } 
+        },
+        {
+          xAxis: item.end,
+          itemStyle: {
+            color: 'rgba(221, 221, 221, 0.5)'
+          } 
+        }
+      ]
+    }))
+  ]
+  const chartData = columns || [];
+  const chartDataSetData = chartData.map((item) => {
     return {
       ...item,
       timestamp: item.timeUnix,         
     }
   })
+  connectionLosses = connectionLosses.map((item) => {
+    return {
+      min: item.start,
+      max: item.end,
+      // color: '#000' 
+    }
+  })
+  console.log(connectionLosses)
+
+
   chartOption.value = {
     tooltip: {
-    trigger: 'axis',
-    position: function (pt) {
-      return [pt[0], '10%'];
-    }
-  },
+      trigger: 'axis',
+      position: function (pt) {
+        return [pt[0], '10%'];
+      }
+    },
     dataset: {
-      source: chartOptions,
+      source: chartDataSetData,
       dimensions: ['timestamp', 'value'],
     },
     xAxis: { 
@@ -71,50 +121,33 @@ const setOptions = (data) => {
     {
       type: 'slider',
       start: 0,
-      end: 20
+      end: 10
     },
     {
       start: 0,
-      end: 20
+      end: 10
     }
   ],
     series: [
       {
         name: 'Posture',
         type: 'line',
-        symbol: 'circle',
+        symbol: 'none',
         symbolSize: 7,
         sampling: 'lttb',
         encode: {
           x: 'timestamp',
           y: 'Value'
         },
-        markLine: {
+        itemStyle: {
+          color: '#00549F'
+        },
+        step: true,
+        markArea: {
           symbol: ['none', 'none'],
-          data:[
-            {
-              xAxis: 1694723617,
-              symbol: 'none',
-              lineStyle: {
-                color: '#008000',
-                type: 'solid',
-                width: 3 
-
-              }
-            },
-            {
-              xAxis: 1694793800,
-              symbol: 'none',
-              lineStyle: {
-                color: '#008000',
-                type: 'solid',
-                width: 3
-              }
-            }
-          ]
-        }
+          data: manualClinicalEvents
+        },
       },
-  
     ]
   }
 }

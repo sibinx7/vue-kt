@@ -32,7 +32,7 @@ onMounted(() => {
 
   setTimeout(() => {
     if(plotData.length){
-      setChartOptions(plotData);
+      setChartOptions({plotData});
     }    
   },500)
   
@@ -42,14 +42,14 @@ onUnmounted(() => {
 
 })
 
-const setChartOptions = (data) => {
+const setChartOptions = ({plotData }) => {
   // debugger
 
   
   // debugger 
   chartOption.value = {
     dataset: {
-      source: data,
+      source: plotData,
       dimensions: ['timestamp', 'SBP', 'DBP'],
     },
     xAxis: { 
@@ -74,30 +74,9 @@ const setChartOptions = (data) => {
           x: 'timestamp',
           y: 'SBP'
         },
-        markLine: {
-          symbol: ['none', 'none'],
-          data:[
-            {
-              xAxis: 1694723617,
-              symbol: 'none',
-              lineStyle: {
-                color: '#008000',
-                type: 'solid',
-                width: 3 
-
-              }
-            },
-            {
-              xAxis: 1694793800,
-              symbol: 'none',
-              lineStyle: {
-                color: '#008000',
-                type: 'solid',
-                width: 3
-              }
-            }
-          ]
-        }
+        itemStyle: {
+          color: '#2887DC'
+        },
       },
       {
         name: 'Diastolic Pressure',
@@ -107,6 +86,9 @@ const setChartOptions = (data) => {
         encode: {
           x: 'timestamp',
           y: 'DBP'
+        },
+        itemStyle: {
+          color: '#033B6C'
         }
       }
     ]

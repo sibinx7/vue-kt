@@ -4175,61 +4175,61 @@
             "field": "Posture",
             "timeUnix": 1694694636,
             "timeString": "2023-09-14 18:00:36",
-            "value": 0.0
+            "value": 1.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694663,
             "timeString": "2023-09-14 18:01:03",
-            "value": 0.0
+            "value": 3.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694690,
             "timeString": "2023-09-14 18:01:30",
-            "value": 0.0
+            "value": 11.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694717,
             "timeString": "2023-09-14 18:01:57",
-            "value": 0.0
+            "value": 7.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694744,
             "timeString": "2023-09-14 18:02:24",
-            "value": 0.0
+            "value": 5.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694771,
             "timeString": "2023-09-14 18:02:51",
-            "value": 0.0
+            "value": 3.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694798,
             "timeString": "2023-09-14 18:03:18",
-            "value": 0.0
+            "value": 1.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694825,
             "timeString": "2023-09-14 18:03:45",
-            "value": 0.0
+            "value": 1.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694852,
             "timeString": "2023-09-14 18:04:12",
-            "value": 0.0
+            "value": 2.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694879,
             "timeString": "2023-09-14 18:04:39",
-            "value": 0.0
+            "value": 3.0
           },
           {
             "field": "Posture",
@@ -4241,73 +4241,73 @@
             "field": "Posture",
             "timeUnix": 1694694933,
             "timeString": "2023-09-14 18:05:33",
-            "value": 0.0
+            "value": 21.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694960,
             "timeString": "2023-09-14 18:06:00",
-            "value": 0.0
+            "value": 15.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694694987,
             "timeString": "2023-09-14 18:06:27",
-            "value": 0.0
+            "value": 15.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695014,
             "timeString": "2023-09-14 18:06:54",
-            "value": 0.0
+            "value": 20.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695041,
             "timeString": "2023-09-14 18:07:21",
-            "value": 0.0
+            "value": 20.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695068,
             "timeString": "2023-09-14 18:07:48",
-            "value": 0.0
+            "value": 20.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695095,
             "timeString": "2023-09-14 18:08:15",
-            "value": 0.0
+            "value": 30.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695122,
             "timeString": "2023-09-14 18:08:42",
-            "value": 0.0
+            "value": 30.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695149,
             "timeString": "2023-09-14 18:09:09",
-            "value": 0.0
+            "value": 30.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695176,
             "timeString": "2023-09-14 18:09:36",
-            "value": 0.0
+            "value": 50.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695203,
             "timeString": "2023-09-14 18:10:03",
-            "value": 0.0
+            "value": 50.0
           },
           {
             "field": "Posture",
             "timeUnix": 1694695230,
             "timeString": "2023-09-14 18:10:30",
-            "value": 0.0
+            "value": 27.0
           },
           {
             "field": "Posture",
@@ -8180,8 +8180,16 @@
             "value": 0.0
           }
         ],
-        "manual-events": [],
-        "clinical-alerts": [],
+        "manual-events": [
+          { "start": 1694694771, "end": 1694694781 },
+          { "start": 1694704851, "end": 1694704871 },
+          { "start": 1694712771, "end": 1694712871 }
+        ],
+        "clinical-alerts": [
+          { "start": 1694695771, "end": 1694695871 },
+          { "start": 1694707771, "end": 1694707871 },
+          { "start": 1694711771, "end": 1694711871 }
+        ],
         "connection-loss": [
           { "start": 1694695689, "end": 1694695689 },
           { "start": 1694695743, "end": 1694695797 },
@@ -16341,6 +16349,14 @@
             "SBP": 131,
             "DBP": 77
           }
+        ],
+        "manual-events": [
+
+        ],
+        "clinical-alerts": [
+          { "start": 1694697749, "end": 1694713500 },
+          { "start": 1694696745, "end": 1694697615 },
+          { "start": 1694694600, "end": 1694696577 }
         ]
       }
     },

@@ -1,13 +1,12 @@
 <template>
-  <div id="square-line-chart-box" class="square-line-chart-box">
-    <h1>Square Step</h1>
-    <div id="square-line-chart" ref="squareLineRef" class="square-line-chart">
+  <div id="line-chart-box" class="line-chart-wrapper">
+    <div id="line-chart-element" ref="lineChartRef" class="bp-chart-element">
 
     </div>
   </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, shallowRef, ref , watch } from "vue";
+import { onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
 import * as echarts from 'echarts/core';
 import {
   TitleComponent,
@@ -17,12 +16,7 @@ import {
   LegendComponent,
   MarkLineComponent,
   MarkPointComponent,
-  DatasetComponent,  
-  DataZoomComponent,
-  DataZoomInsideComponent,
-  DataZoomSliderComponent,
-  MarkAreaComponent
-  
+  DatasetComponent,
 } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
@@ -38,14 +32,11 @@ echarts.use([
   MarkPointComponent,
   LineChart,  
   UniversalTransition,
-  CanvasRenderer,
-  DataZoomComponent,
-  DataZoomInsideComponent,
-  DataZoomSliderComponent,
-  MarkAreaComponent
-  
+  CanvasRenderer
 ]);
-const squareLineRef = ref(null);
+
+const lineChartRef = ref(null);
+const chartInstance = shallowRef({});
 
 const props = defineProps({
   options: {
@@ -54,32 +45,29 @@ const props = defineProps({
   }
 })
 
-const myChart = shallowRef(null);
-
 onMounted(() => {
-  myChart.value = echarts.init(squareLineRef.value);
-  // debugger 
+  chartInstance.value = echarts.init(lineChartRef.value);
+  // drawGraph(props.options)
 })
 
 onUnmounted(() => {
 
+  
 })
 
-const drawChart = (options) => {
-  myChart.value.setOption(options);
+const drawGraph = (option) => {
+  chartInstance.value.setOption(option)
 }
 
-watch(() => props.options, (newOptions, oldOptions) => {
-  // debugger 
-  console.log(oldOptions  )
+watch(() => props.options, (newOptions) => {
   if(newOptions && Object.keys(newOptions).length){
-    // debugger
-    drawChart(newOptions)
-  }
+    drawGraph(newOptions);
+  }  
 })
+
 </script>
 <style lang="scss" scoped>
-.square-line-chart{
+.bp-chart-element{
   width: 100%;
   height: 200px;
 }
