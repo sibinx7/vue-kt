@@ -1,6 +1,5 @@
 <template>
-  <div class="trend-bp-chart-widget">
-    <h1>BP Chart</h1>
+  <div class="trend-bp-chart-widget">    
     <BPLineChart :options="chartOption"/>
   </div>
 </template>

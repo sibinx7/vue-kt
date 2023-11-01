@@ -1,10 +1,12 @@
 <template>
   <div>
     <h1>Trend </h1>
-    <div v-for="trendKey, index in trendsDataKeys" :key="index">          
+    <div v-for="trendKey, index in trendsDataKeys" :key="index"> 
       <div v-if="trendsComponents[trendKey]">
         <component 
-      :is="trendsComponents[trendKey]" :chart-data="multiChartData[trendKey]"/>
+      :is="trendsComponents[trendKey]" 
+      :trend-key="trendKey"
+      :chart-data="multiChartData[trendKey]"/>
       </div>        
       
     </div>
@@ -38,7 +40,7 @@
     multiChartData.value = trends; 
     trendsDataKeys.value = Object.keys(trends);
     trendsDataKeys.value.forEach((item)=> {
-      trendsComponents.value[item] = keyComponent[item] ? keyComponent[item] : TrendChart 
+      trendsComponents.value[item] = keyComponent[item] ? keyComponent[item] : markRaw(TrendChart) 
     });        
   })
 </script>

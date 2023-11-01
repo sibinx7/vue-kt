@@ -1,18 +1,22 @@
 <template>
-  <div class="trend-chart-widget">
+  <div class="trend-chart-widget">    
     <div id="trend-line-chart">
-      <LineChart :options="chartOptions"/>
+      <CommonLineChart :options="chartOptions"/>
     </div>
   </div>
 </template>
 <script setup>
 import { onMounted, onUnmounted, ref, watch } from "vue";
-import { LineChart } from "echarts/charts";
+import CommonLineChart  from "../charts/common-line-chart.vue";
 
 const props = defineProps({
   chartData: {
     type: Object,
     default: () => {}
+  },
+  trendKey: {
+    type: String,
+    default: ''
   }
 })
 const chartOptions = ref({});
@@ -26,6 +30,7 @@ onUnmounted(() => {
 });
 
 const setOptions = (data) => {
+  // debugger 
   const columns = data.columns;
   const manualEvents = data['manual-events'];
   const clinicalAlerts = data['clinical-alerts'];
@@ -37,7 +42,28 @@ const setOptions = (data) => {
     }
   });
 
-  console.log(connectionLoss);
+  const connectionLoseData = (connectionLoss).map((item) => {
+    return {
+      min: item.start,
+      max: item.end,
+      // color: 'transparent',
+      // symbol: 'circle' 
+    }
+  });
+
+  let visualMapData = {};
+  if(connectionLoseData.length){
+    visualMapData = {
+      show: false,
+      dimension: 0,
+      type: 'piecewise',
+      pieces: connectionLoseData,
+      outOfRange: {
+        color: '#033B6C'
+      },
+     
+    }
+  }
   const manualClinicalEvents = [
     ...(manualEvents.map((item) => {
       return [
@@ -75,6 +101,7 @@ const setOptions = (data) => {
     }))
   ]
 
+  // debugger
   chartOptions.value = {
     tooltip: {
       trigger: 'axis',
@@ -118,11 +145,12 @@ const setOptions = (data) => {
       end: 10
     }
   ],
+  visualMap: visualMapData,
     series: [
       {
         name: '',
         type: 'line',
-        symbol: 'circle',
+        symbol: 'none',
         symbolSize: 7,
         encode: {
           x: 'timestamp',
@@ -138,7 +166,10 @@ const setOptions = (data) => {
       }
     ]
   }
-
+  console.log('#####')
+  console.log(props.trendKey)
+  console.log('ManualClinical Events', manualClinicalEvents)
+  console.log('#####')
 }
 
 watch(() => props.chartData, (newChartData) => {

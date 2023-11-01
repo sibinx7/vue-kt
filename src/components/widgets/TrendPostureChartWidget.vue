@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Posture Chart</h1>
+  <div>    
     <div id="trend-posture-chart-widget" class="trend-posture-chart-widget">
       <StepLineChart :options="chartOption"/>
     </div>

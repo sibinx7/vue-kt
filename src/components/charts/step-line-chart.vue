@@ -1,6 +1,5 @@
 <template>
-  <div id="square-line-chart-box" class="square-line-chart-box">
-    <h1>Square Step</h1>
+  <div id="square-line-chart-box" class="square-line-chart-box">  
     <div id="square-line-chart" ref="squareLineRef" class="square-line-chart">
 
     </div>
