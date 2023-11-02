@@ -17,6 +17,7 @@ import {
   MarkLineComponent,
   MarkPointComponent,
   DatasetComponent,
+  DataZoomComponent,
 } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
@@ -32,7 +33,8 @@ echarts.use([
   MarkPointComponent,
   LineChart,  
   UniversalTransition,
-  CanvasRenderer
+  CanvasRenderer,
+  DataZoomComponent
 ]);
 const props = defineProps({
   options: {

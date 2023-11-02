@@ -21,18 +21,10 @@ const props = defineProps({
 
 
 onMounted(() => {
-  const plotData = (props.chartData.columns || []).map((item) => {
-    return {
-      timestamp: item.timeUnix,
-      SBP: item.SBP,
-      DBP:item.DBP 
-    }
-  });
+  
 
   setTimeout(() => {
-    if(plotData.length){
-      setChartOptions({plotData});
-    }    
+    setChartOptions(props.chartData);   
   },500)
   
 })
@@ -41,9 +33,74 @@ onUnmounted(() => {
 
 })
 
-const setChartOptions = ({plotData }) => {
+const setChartOptions = (chartData) => {
   // debugger
+  const plotData = (chartData.columns || []).map((item) => {
+    return {
+      timestamp: item.timeUnix,
+      SBP: item.SBP,
+      DBP:item.DBP 
+    }
+  });
 
+  const manualAlerts = chartData['manual-events'];
+  const clinicalAlerts = chartData['clinical-alerts'];
+  const connectionLoseData = (chartData['connection-loss'] || []).map((item) => {
+    return {
+      min: item.start,
+      end: item.end,
+      color: 'red' 
+    }
+  })
+  let visualMapData = {};
+  if(connectionLoseData.length){
+    visualMapData = {
+      show: false,
+      dimension: 0,
+      type: 'piecewise',
+      pieces: connectionLoseData,
+      outOfRange: {
+        color: '#033B6C'
+      },     
+    }
+  }
+
+  const manualClinicalAlerts = [
+    ...(manualAlerts.map((item) => {
+      return [
+        {
+          name: 'Manual Alerts',
+          xAxis: item.start,
+          itemStyle: {
+            color: 'rgba(122, 217, 162, 0.5)' 
+          }  
+        },
+        {
+          xAxis: item.end,
+          itemStyle: {
+            color: 'rgba(122, 217, 162, 0.5)' 
+          }  
+        }
+      ]
+    })),
+    ...(clinicalAlerts.map((item) => {
+      return [
+        {
+          name: 'Clinical Alerts',
+          xAxis: item.start,
+          itemStyle: {
+            color: 'rgba(221, 221, 221, 0.5)'
+          }  
+        },
+        {
+          xAxis: item.end,
+          itemStyle: {
+            color: 'rgba(221, 221, 221, 0.5)'
+          }  
+        }
+      ]
+    }))
+  ]
   
   // debugger 
   chartOption.value = {
@@ -63,6 +120,18 @@ const setChartOptions = ({plotData }) => {
       name: 'degree',
       type: 'value'
     },
+    dataZoom: [
+    {
+      type: 'slider',
+      start: 0,
+      end: 100
+    },
+    {
+      start: 0,
+      end: 100
+    }
+  ],
+  visualMapData,
     series: [
       {
         name: 'Systolic Pressure',
@@ -76,6 +145,10 @@ const setChartOptions = ({plotData }) => {
         itemStyle: {
           color: '#2887DC'
         },
+        markArea: {
+          symbol: ['none', 'none'],
+          data: manualClinicalAlerts 
+        }
       },
       {
         name: 'Diastolic Pressure',

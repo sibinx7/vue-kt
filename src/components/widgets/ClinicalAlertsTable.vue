@@ -17,7 +17,7 @@
         </div>
       </template>
       <template #item-Acknowledged="{ Acknowledged }">
-        <div v-if="Acknowledged.by && Acknowledged.time">
+        <div v-if="Acknowledged &&  (Acknowledged.by && Acknowledged.time)">
           <div>
             <span>by 
               <span>{{ Acknowledged.by }}</span>

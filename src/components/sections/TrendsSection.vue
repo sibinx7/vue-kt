@@ -2,6 +2,7 @@
   <div>
     <h1>Trend </h1>
     <div v-for="trendKey, index in trendsDataKeys" :key="index"> 
+      <h4>{{  trendKey  }}</h4>
       <div v-if="trendsComponents[trendKey]">
         <component 
       :is="trendsComponents[trendKey]" 

@@ -120,11 +120,11 @@ const setOptions = ( data) => {
     {
       type: 'slider',
       start: 0,
-      end: 10
+      end: 100
     },
     {
       start: 0,
-      end: 10
+      end: 100
     }
   ],
     series: [

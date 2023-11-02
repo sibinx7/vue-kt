@@ -138,11 +138,11 @@ const setOptions = (data) => {
     {
       type: 'slider',
       start: 0,
-      end: 10
+      end: 100
     },
     {
       start: 0,
-      end: 10
+      end: 100
     }
   ],
   visualMap: visualMapData,
@@ -166,10 +166,7 @@ const setOptions = (data) => {
       }
     ]
   }
-  console.log('#####')
-  console.log(props.trendKey)
-  console.log('ManualClinical Events', manualClinicalEvents)
-  console.log('#####')
+
 }
 
 watch(() => props.chartData, (newChartData) => {
