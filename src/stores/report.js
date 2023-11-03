@@ -107,10 +107,15 @@ import moment from 'moment';
         AcknowledgedData: AcknowledgedData()
       }
     });
+  });
+  const manualEventsTableData = computed(() => {
+    const tableValue = manualEvents.value['table-value'];
+    return tableValue;
   })
   return { report, personalInfo, hospitalInfo, vitalSignsAlerts, motionPosture,
     manualEvents, clinicalAlerts, trends, locationAndGroup,
-    reportInfo, patchType, units, timezone, clinicalAlertsTableData
+    reportInfo, patchType, units, timezone, 
+    clinicalAlertsTableData, manualEventsTableData
   }
 })
 

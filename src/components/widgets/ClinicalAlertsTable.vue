@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="clinical-alerts-table-wrapper">
     <EasyDataTable
       :headers="headers"
       :items="tableData"
