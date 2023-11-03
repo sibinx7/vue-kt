@@ -10,7 +10,7 @@
   </div>
 </template>
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, shallowRef } from 'vue'
 import * as echarts from 'echarts/core'
 import {
   GridComponent,
@@ -36,6 +36,8 @@ const clinicalAlertsTimeSeries = ref(null)
 const chartSeriesData = ref([])
 const chartPieceData = ref([])
 
+const clinicalAlertChart = shallowRef()
+
 echarts.use([
   GridComponent,
   VisualMapComponent,
@@ -50,7 +52,7 @@ echarts.use([
 
 const setChartOptions = () => {
   const clinicalAlertElement = clinicalAlertsTimeSeries.value
-  const clinicalAlertChart = echarts.init(clinicalAlertElement)
+  clinicalAlertChart.value = echarts.init(clinicalAlertElement)
 
   const seriesData = chartSeriesData.value.map((item) => {
     // debugger 
@@ -128,7 +130,7 @@ const setChartOptions = () => {
     ]
   }
   // debugger
-  clinicalAlertChart.setOption(option)
+  clinicalAlertChart.value.setOption(option)
 }
 
 const convertToPieceData = (clinicalAlertsChartData) => {

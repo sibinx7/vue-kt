@@ -17,29 +17,27 @@ import moment from 'moment';
     const trends = report['reportData']['Trends'];
     const trendsBPDIA = trends['BPDIA'];
     const trendsBPSYS = trends['BPSYS'];
-    const trendsBPDIAColumn = trendsBPDIA['columns'];
-    const trendsBPSYSColumn = trendsBPSYS['columns'];
-    const bpColumns = trendsBPDIAColumn.map((item, index) => {
-      const trendBPSYSItem = trendsBPSYSColumn[index];
-      return {
-        field: 'BP',
-        timeUnix: item.timeUnix,
-        SBP: trendBPSYSItem.value,
-        DBP: item.value 
+    if(trendsBPDIA && trendsBPSYS){
+      const trendsBPDIAColumn = trendsBPDIA['columns'];
+      const trendsBPSYSColumn = trendsBPSYS['columns'];
+      const bpColumns = trendsBPDIAColumn.map((item, index) => {
+        const trendBPSYSItem = trendsBPSYSColumn[index];
+        return {
+          field: 'BP',
+          timeUnix: item.timeUnix,
+          SBP: trendBPSYSItem.value,
+          DBP: item.value 
+        }
+      })
+      delete trends['BPDIA'];
+      delete trends['BPSYS'];
+      trends['BP'] = {
+        columns: bpColumns,
+        'manual-events': trendsBPDIA['manual-events'],
+        'clinical-alerts': trendsBPDIA['clinical-alerts'],
+        'connection-loss': trendsBPDIA['connection-loss']
       }
-    })
-
-    delete trends['BPDIA'];
-    delete trends['BPSYS'];
-
-    trends['BP'] = {
-      columns: bpColumns,
-      'manual-events': trendsBPDIA['manual-events'],
-      'clinical-alerts': trendsBPDIA['clinical-alerts'],
-      'connection-loss': trendsBPDIA['connection-loss']
     }
-
-
     return trends
   });
   const locationAndGroup = computed(() => report['reportData']['Location-and-Group']);
