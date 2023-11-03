@@ -215,47 +215,45 @@
             },
             "Action-Taken": ""
           },
-          [
-            {
-              "Alert-startTime": "16:59",
-              "Alert-endTime": "17:16",
-              "Alert-Date": "18-Oct-2023",
-              "Priority": "MEDIUM",
-              "Parameters": "SPO2",
-              "Value": "85",
-              "Acknowledged": {
-                "by": "",
-                "time": null
-              },
-              "Action-Taken": ""
+          {
+            "Alert-startTime": "16:59",
+            "Alert-endTime": "17:16",
+            "Alert-Date": "18-Oct-2023",
+            "Priority": "MEDIUM",
+            "Parameters": "SPO2",
+            "Value": "85",
+            "Acknowledged": {
+              "by": "",
+              "time": null
             },
-            {
-              "Alert-startTime": "16:46",
-              "Alert-endTime": "16:58",
-              "Alert-Date": "18-Oct-2023",
-              "Priority": "MEDIUM",
-              "Parameters": "SPO2",
-              "Value": "85",
-              "Acknowledged": {
-                "by": "",
-                "time": null
-              },
-              "Action-Taken": ""
+            "Action-Taken": ""
+          },
+          {
+            "Alert-startTime": "16:46",
+            "Alert-endTime": "16:58",
+            "Alert-Date": "18-Oct-2023",
+            "Priority": "MEDIUM",
+            "Parameters": "SPO2",
+            "Value": "85",
+            "Acknowledged": {
+              "by": "",
+              "time": null
             },
-            {
-              "Alert-startTime": "16:20",
-              "Alert-endTime": "16:37",
-              "Alert-Date": "18-Oct-2023",
-              "Priority": "MEDIUM",
-              "Parameters": "SPO2",
-              "Value": "70",
-              "Acknowledged": {
-                "by": "",
-                "time": null
-              },
-              "Action-Taken": ""
-            }
-          ]
+            "Action-Taken": ""
+          },
+          {
+            "Alert-startTime": "16:20",
+            "Alert-endTime": "16:37",
+            "Alert-Date": "18-Oct-2023",
+            "Priority": "MEDIUM",
+            "Parameters": "SPO2",
+            "Value": "70",
+            "Acknowledged": {
+              "by": "",
+              "time": null
+            },
+            "Action-Taken": ""
+          }
         ],
         "alert-count": [
           {

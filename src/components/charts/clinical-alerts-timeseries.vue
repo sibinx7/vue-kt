@@ -28,8 +28,7 @@ import moment from 'moment'
 import useReportStore from '../../stores/report'
 const reportStore = useReportStore()
 const clinicalAlerts = reportStore.clinicalAlerts
-const clinicalAlertsChartData = clinicalAlerts['clinical-alerts']
-const clinicalAlertsTableData = clinicalAlerts['table-value']
+
 
 const clinicalAlertsTimeSeries = ref(null)
 
@@ -69,14 +68,14 @@ const setChartOptions = () => {
       timeStart: +timeStart,
       timeEnd: +timeEnd,
       timestamp: +timeStart,
-      value: +item.Value,
+      xValue: 100,
     }
   })
-  // debugger
+  
   const option = {
     dataset: {
       source: seriesData,
-      dimensions: ['timestamp', 'value']
+      dimensions: ['timestamp', 'xValue']
     },
     xAxis: [
       {
@@ -95,17 +94,17 @@ const setChartOptions = () => {
       }
     ],
     yAxis: {
-      show: false
+      show: true
     },
     dataZoom: [
       {
         type: 'slider',
         start: 0,
-        end: 10
+        end: 100
       },
       {
         start: 0,
-        end: 10
+        end: 100
       }
     ],
     series: [
@@ -116,7 +115,7 @@ const setChartOptions = () => {
         symbolSize: 7,
         encode: {
           x: 'timestamp',
-          y: 'value'
+          y: 'xValue'
         },
         itemStyle: {
           color: 'transparent'
@@ -128,11 +127,11 @@ const setChartOptions = () => {
       }
     ]
   }
-
+  // debugger
   clinicalAlertChart.setOption(option)
 }
 
-const convertToPieceData = () => {
+const convertToPieceData = (clinicalAlertsChartData) => {
   chartPieceData.value = clinicalAlertsChartData.map((item) => {
     return [
      {
@@ -150,14 +149,17 @@ const convertToPieceData = () => {
      }
     ]
   })
+
 }
 
-const convertToTableData = () => {
+const convertToTableData = (clinicalAlertsTableData) => {
+  // debugger 
   chartSeriesData.value = clinicalAlertsTableData
     .map((item) => {
+      // debugger 
       // const alertStartTimeWithDate;
       // const alertEndTimeWithDate;
-      return {
+      const returnData =  {
         AlertStartTime: item['Alert-startTime'],
         AlertEndTime: item['Alert-endTime'],
         AlertDate: item['Alert-Date'],
@@ -167,19 +169,30 @@ const convertToTableData = () => {
         Acknowledged: item.Acknowledged,
         ActionTaken: item['Action-Taken']
       }
+
+      return returnData;
     })
+    // debugger 
     .sort((a, b) => {
-      const aAlertStartTime = moment(a.AlertStartTime, 'HH::mm').format('x')
-      const bAlertStartTime = moment(b.AlertStartTime, 'HH::mm').format('x')
+      const aAlertStartTimeDate = `${a.AlertDate} ${a.AlertStartTime}`;
+      const bAlertStartTimeDate = `${b.AlertDate} ${b.AlertStartTime}`;
+      const aAlertStartTime = moment(aAlertStartTimeDate, 'DD-MMM-YYYY HH::mm').format('X')
+      const bAlertStartTime = moment(bAlertStartTimeDate, 'DD-MMM-YYYY HH::mm').format('X')
       return bAlertStartTime - aAlertStartTime
     })
 }
 
-onMounted(() => {
-  convertToPieceData()
-  convertToTableData()
+const getClinicalDataFromStore = () => {
+  const clinicalAlertsChartData = clinicalAlerts['clinical-alerts']
+  const clinicalAlertsTableData = clinicalAlerts['table-value']
+  convertToPieceData(clinicalAlertsChartData)
+  convertToTableData(clinicalAlertsTableData)
 
   setChartOptions()
+}
+
+onMounted(() => {
+  getClinicalDataFromStore();
 })
 
 onUnmounted(() => {
